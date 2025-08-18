@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>RSVP Reader — ORP centered</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1> ORP Centered RSVP Reader - Ross Barrett</h1>
+
+    <div id="drop-zone" class="drop-zone">
+      Drop a PDF here, or click to choose a file.
+      <input type="file" id="fileInput" accept="application/pdf" hidden>
+    </div>
+
+    <div id="reader" class="reader">
+      <!-- guide sits exactly at center -->
+      <div id="guide" aria-hidden="true">
+        <div id="tickTop" class="tick"></div>
+        <div id="tickBottom" class="tick"></div>
+      </div>
+
+      <!-- word area: prefix / pivot / suffix are positioned absolutely -->
+      <div id="word" class="word" aria-live="polite"></div>
+    </div>
+
+    <div class="controls">
+      <button id="playBtn">Play</button>
+
+      <label for="wpmSlider">WPM: <span id="wpmLabel">300</span></label>
+      <input id="wpmSlider" type="range" min="0" max="1000" value="300" />
+
+      <div id="status" class="status">No file loaded.</div>
+    </div>
+  </main>
+
+  <!-- PDF.js (cdn) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    // worker path for pdf.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

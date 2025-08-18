@@ -1,0 +1,150 @@
+:root{
+    --font-size: 48px; /* change to scale the whole reading area */
+    --tick-height: 26px;
+    --tick-gap: 10px; /* gap between pivot center and ticks */
+    --tick-width: 3px;
+    --accent: #e74c3c;
+  }
+  
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: #f5f7fb;
+    color: #222;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 900px;
+  }
+  
+  h1 {
+    font-size: 18px;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+  }
+  
+  .drop-zone {
+    border: 2px dashed #bfc9d9;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    color: #4a5568;
+    cursor: pointer;
+    margin-bottom: 18px;
+  }
+  
+  .reader {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  
+  /* The guide anchor is exactly centered */
+  #guide {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  /* tick elements are absolutely positioned relative to #guide, we'll move them with JS */
+  .tick {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--tick-width);
+    height: var(--tick-height);
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  
+  /* word area: prefix / pivot / suffix are absolutely positioned */
+  .word {
+    position: relative;
+    font-size: var(--font-size);
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: visible;
+    z-index: 5;
+  }
+  
+  /* each part is absolutely positioned and vertically centered */
+  .word .prefix,
+  .word .pivot,
+  .word .suffix {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* pivot at center (exactly) */
+  .word .pivot {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent);
+  }
+  
+  /* prefix ends at the center: its right edge should touch center */
+  .word .prefix {
+    right: 50%;
+    transform: translate(-100%, -50%); /* align its right edge to center */
+    text-align: right;
+    padding-right: 0.05ch;
+  }
+  
+  /* suffix starts at the center: its left edge should touch center */
+  .word .suffix {
+    left: 50%;
+    transform: translate(0, -50%);
+    text-align: left;
+    padding-left: 0.05ch;
+  }
+  
+  /* controls */
+  .controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  button:active { transform: translateY(1px); }
+  input[type="range"] { width: 220px; }
+  
+  .status {
+    color: #475569;
+    font-size: 13px;
+    margin-left: 8px;
+  }
+  

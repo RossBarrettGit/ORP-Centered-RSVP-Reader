@@ -250,3 +250,7 @@ wpmSlider.addEventListener('input', () => {
 });
 
 window.addEventListener('beforeunload', () => clearTimeout(timerId));
+
+function home(){
+  window.open("https://rossbarrettgit.github.io/home-webpage/");
+}

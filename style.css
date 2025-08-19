@@ -16,6 +16,29 @@
     justify-content: center;
     padding: 24px;
   }
+
+  .home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #fff;
+    border: 2px solid #000;
+    color: #000;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    z-index: 2;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.4); 
+    font-weight: bold;
+  }
+
+  .home:hover{
+    background-color: #c6c6c6;
+    border: 2px solid #000;
+    border-radius: 6px;
+    color: #000000;
+  }
   
   .container {
     width: 100%;

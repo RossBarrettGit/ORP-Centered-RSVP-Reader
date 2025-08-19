@@ -20,6 +20,22 @@ let wpm = parseInt(wpmSlider.value, 10) || 300;
 const pdfjs = window.pdfjsLib;
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
+// Default demo text (preloaded if no PDF is loaded)
+const demoText = `
+This is a demonstration of the RSVP reader.
+Each word is shown one at a time.
+The Optimal Recognition Point is fixed at the center.
+Try adjusting the speed with the slider.
+Upload your own PDF to continue reading.
+`;
+
+words = demoText.replace(/\s+/g, ' ').trim().split(' ');
+index = 0;
+showWord(words[index]); // Show first word immediately
+
+
+
+
 // ------- Drag & click file handlers -------
 dropZone.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', (e) => {
@@ -174,6 +190,8 @@ function scheduleNext(delay = 0) {
     }
     const w = words[index++];
     showWord(w);
+
+    // Look up current WPM *each time* before scheduling next word
     if (wpm > 0) {
       const nextDelay = Math.round(60000 / wpm);
       scheduleNext(nextDelay);
@@ -182,6 +200,7 @@ function scheduleNext(delay = 0) {
     }
   }, delay);
 }
+
 
 function startPlayback() {
   if (!words.length) {
@@ -223,10 +242,11 @@ playBtn.addEventListener('click', () => {
 wpmSlider.addEventListener('input', () => {
   wpm = parseInt(wpmSlider.value, 10) || 0;
   wpmLabel.textContent = wpm;
-  if (isPlaying) {
-    clearTimeout(timerId);
-    scheduleNext(0);
-  }
+
+  // if (isPlaying) {
+  //   clearTimeout(timerId);
+  //   scheduleNext(0);
+  // }
 });
 
 window.addEventListener('beforeunload', () => clearTimeout(timerId));

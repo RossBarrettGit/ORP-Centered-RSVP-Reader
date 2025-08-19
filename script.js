@@ -22,12 +22,21 @@ pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pd
 
 // Default demo text (preloaded if no PDF is loaded)
 const demoText = `
-This is a demonstration of the RSVP reader.
-Each word is shown one at a time.
-The Optimal Recognition Point is fixed at the center.
-Try adjusting the speed with the slider.
-Upload your own PDF to continue reading.
+Welcome to the RSVP Reader demo. 
+This tool shows one word at a time, keeping your eyes focused on the most important letter. 
+This letter is called the Optimal Recognition Point, or ORP. 
+It is the letter that helps your brain recognize the word fastest. 
+The key is that the ORP letter stays in the same spot, while the rest of the word moves around it. 
+
+By keeping your eyes fixed on the ORP, you don’t need to scan across lines of text. 
+This lets you read much faster and with less effort. 
+
+Press Play to start reading. 
+Use the slider to change the speed, from slow practice to hundreds of words per minute. 
+You can also upload your own PDF to read your own content.
 `;
+
+
 
 words = demoText.replace(/\s+/g, ' ').trim().split(' ');
 index = 0;
